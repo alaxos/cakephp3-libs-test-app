@@ -1,0 +1,15 @@
+/vendor/*
+/config/app.php
+/tmp/*
+/logs/*
+
+.buildpath
+.project
+.settings
+
+uploaded_files/*
+test_uploaded_files/*
+webroot/files/*
+webroot/test_files/*
+
+*.01

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# run from app root folder
+
+./bin/cake bake model Users --theme Alaxos/BootstrapTheme --force
+./bin/cake bake controller Users --theme Alaxos/BootstrapTheme --force
+./bin/cake bake template Users --theme Alaxos/BootstrapTheme --force
+
+./bin/cake bake model Roles --theme Alaxos/BootstrapTheme --force
+./bin/cake bake controller Roles --theme Alaxos/BootstrapTheme --force
+./bin/cake bake template Roles --theme Alaxos/BootstrapTheme --force
