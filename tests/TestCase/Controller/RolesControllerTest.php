@@ -295,7 +295,85 @@ class RolesControllerTest extends IntegrationTestCase
      */
     public function testAdd()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $data = ['name' => 'New role'];
+        $this->post('/roles/add', $data);
+
+        $this->assertRedirect('/roles');
+
+        $total = TableRegistry::get('Roles')->find()->count();
+        $this->assertEquals(4, $total);
+
+        $role = TableRegistry::get('Roles')->get(4);
+        $this->assertNull($role->created_by);
+        $this->assertNull($role->modified_by);
+    }
+
+    public function testAddByUser1()
+    {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => 1
+                ]
+            ]
+        ]);
+
+        $data = ['name' => 'New role'];
+        $this->post('/roles/add', $data);
+
+        $this->assertRedirect('/roles');
+
+        $total = TableRegistry::get('Roles')->find()->count();
+        $this->assertEquals(4, $total);
+
+        $role = TableRegistry::get('Roles')->get(4);
+        $this->assertEquals(1, $role->created_by);
+        $this->assertNull($role->modified_by);
+    }
+
+    public function testAddFail()
+    {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        /*
+         * Name empty
+         */
+        $data = ['name' => ''];
+        $this->post('/roles/add', $data);
+
+        $this->assertResponseOk();
+
+        $total = TableRegistry::get('Roles')->find()->count();
+        $this->assertEquals(3, $total);
+
+        /*
+         * Name not given
+         */
+        $data = [];
+        $this->post('/roles/add', $data);
+
+        $this->assertResponseOk();
+
+        $total = TableRegistry::get('Roles')->find()->count();
+        $this->assertEquals(3, $total);
+
+        /*
+         * Existing name
+         */
+        $data = ['name' => 'administrateur'];
+        $this->post('/roles/add', $data);
+
+        $this->assertResponseOk();
+
+        $total = TableRegistry::get('Roles')->find()->count();
+        $this->assertEquals(3, $total);
     }
 
     /**
@@ -305,7 +383,111 @@ class RolesControllerTest extends IntegrationTestCase
      */
     public function testEdit()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        /*
+         * Name updated
+         */
+        $data = ['id' => 1, 'name' => 'Role updated'];
+        $this->post('/roles/edit/1', $data);
+
+        $this->assertRedirect('/roles');
+
+        $role = TableRegistry::get('Roles')->get(1);
+        $this->assertEquals('Role updated', $role->name);
+    }
+
+    public function testEditNovalue()
+    {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        /*
+         * Name not given
+         */
+        $data = ['id' => 1];
+        $this->post('/roles/edit/1', $data);
+
+        $this->assertRedirect();
+
+        $role = TableRegistry::get('Roles')->get(1);
+        $this->assertEquals('administrateur', $role->name);
+    }
+
+    public function testEditModifiedByUser1()
+    {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => 1
+                ]
+            ]
+        ]);
+
+        /*
+         * Name updated
+         */
+        $data = ['id' => 1, 'name' => 'Role updated'];
+        $this->post('/roles/edit/1', $data);
+
+        $this->assertRedirect('/roles');
+
+        $role = TableRegistry::get('Roles')->get(1);
+        $this->assertEquals(1, $role->modified_by);
+    }
+
+    public function testEditModifiedByUser2()
+    {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => 2
+                ]
+            ]
+        ]);
+
+        /*
+         * Name updated
+         */
+        $data = ['id' => 1, 'name' => 'Role updated'];
+        $this->post('/roles/edit/1', $data);
+
+        $this->assertRedirect('/roles');
+
+        $role = TableRegistry::get('Roles')->get(1);
+        $this->assertEquals(2, $role->modified_by);
+    }
+
+    public function testEditFail()
+    {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        /*
+         * Name empty
+         */
+        $data = ['id' => 1, 'name' => ''];
+        $this->post('/roles/edit/1', $data);
+
+        $this->assertResponseOk();
+
+        $role = TableRegistry::get('Roles')->get(1);
+        $this->assertEquals('administrateur', $role->name);
+
+        /*
+         * Not existing
+         */
+        $data = ['id' => 5, 'name' => 'edited role'];
+        $this->post('/roles/edit/5', $data);
+
+        $this->assertResponseError();
     }
 
     /**
@@ -315,7 +497,44 @@ class RolesControllerTest extends IntegrationTestCase
      */
     public function testDelete()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $this->post('/roles/delete/3');
+        $this->assertRedirect('/roles');
+        $this->assertSession(__('The role has been deleted'), 'Flash.flash.0.message');
+
+        $total = TableRegistry::get('Roles')->find()->count();
+        $this->assertEquals(2, $total);
+    }
+
+    public function testDeleteNotExisting()
+    {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $this->post('/roles/delete/5');
+
+        $this->assertResponseError();
+
+//         debug($this->_requestSession->read());
+//         debug($this->_response->__toString());
+
+        $total = TableRegistry::get('Roles')->find()->count();
+        $this->assertEquals(3, $total);
+    }
+
+    public function testDeleteFailStillUsed()
+    {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $this->post('/roles/delete/1');
+        $this->assertRedirect('/roles');
+        $this->assertSession(__('The role could not be deleted as it is still used in the database'), 'Flash.flash.0.message');
+
+        $total = TableRegistry::get('Roles')->find()->count();
+        $this->assertEquals(3, $total);
     }
 
     /**
@@ -323,9 +542,92 @@ class RolesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testDeleteAll()
+    public function testDeleteAllNoData()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $data = [];
+
+        $this->post('/roles/delete-all', $data);
+        $this->assertRedirect('/roles');
+        $this->assertSession(__('There was no role to delete'), 'Flash.flash.0.message');
+
+        $total = TableRegistry::get('Roles')->find()->count();
+        $this->assertEquals(3, $total);
+
+//         debug($this->_response->__toString());
+//         debug($this->_requestSession->read());
+    }
+
+    public function testDeleteAllOK()
+    {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $data = ['checked_ids' => [3]];
+
+        $this->post('/roles/delete-all', $data);
+        $this->assertRedirect('/roles');
+        $this->assertSession(__('The selected role has been deleted.'), 'Flash.flash.0.message');
+
+        $total = TableRegistry::get('Roles')->find()->count();
+        $this->assertEquals(2, $total);
+    }
+
+    public function testDeleteAllSomeUsed()
+    {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $data = ['checked_ids' => [1, 2, 3]];
+
+        $this->post('/roles/delete-all', $data);
+        $this->assertRedirect('/roles');
+        $this->assertSession(sprintf(__('Only %s selected roles on %s could be deleted'), 1, 3), 'Flash.flash.0.message');
+
+        $total = TableRegistry::get('Roles')->find()->count();
+        $this->assertEquals(2, $total);
+    }
+
+    public function testDeleteAllAllUsed()
+    {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $data = ['checked_ids' => [1, 2]];
+
+        $this->post('/roles/delete-all', $data);
+        $this->assertRedirect('/roles');
+        $this->assertSession(__('The selected roles could not be deleted. Please, try again.'), 'Flash.flash.0.message');
+
+        $total = TableRegistry::get('Roles')->find()->count();
+        $this->assertEquals(3, $total);
+    }
+
+    public function testDeleteAllNotUsed()
+    {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        /*
+         * Create a new Role that is not used
+         */
+        $data = ['name' => 'New Role'];
+        $this->post('/roles/add', $data);
+        $total = TableRegistry::get('Roles')->find()->count();
+        $this->assertEquals(4, $total);
+
+        /*
+         * Delete 2 roles that are not used
+         */
+        $data = ['checked_ids' => [3, 4]];
+        $this->post('/roles/delete-all', $data);
+        $this->assertRedirect('/roles');
+        $this->assertSession(sprintf(__('The %s selected roles have been deleted.'), 2), 'Flash.flash.0.message');
+
+        $total = TableRegistry::get('Roles')->find()->count();
+        $this->assertEquals(2, $total);
     }
 
     /**
@@ -335,6 +637,84 @@ class RolesControllerTest extends IntegrationTestCase
      */
     public function testCopy()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $data = ['name' => 'Copied role'];
+        $this->post('/roles/copy/1', $data);
+
+        $this->assertRedirect('/roles/view/4');
+
+        $total = TableRegistry::get('Roles')->find()->count();
+        $this->assertEquals(4, $total);
+
+        $role = TableRegistry::get('Roles')->get(4);
+        $this->assertNull($role->created_by);
+        $this->assertNull($role->modified_by);
+    }
+
+    public function testCopyFail()
+    {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        /*
+         * Name empty
+         */
+        $data = ['name' => ''];
+        $this->post('/roles/copy/1', $data);
+
+        $this->assertResponseOk();
+
+        $total = TableRegistry::get('Roles')->find()->count();
+        $this->assertEquals(3, $total);
+
+        /*
+         * Name not given
+         */
+        $data = [];
+        $this->post('/roles/copy/1', $data);
+
+        $this->assertResponseOk();
+
+        $total = TableRegistry::get('Roles')->find()->count();
+        $this->assertEquals(3, $total);
+
+        /*
+         * Existing name
+         */
+        $data = ['name' => 'administrateur'];
+        $this->post('/roles/copy/1', $data);
+
+        $this->assertResponseOk();
+
+        $total = TableRegistry::get('Roles')->find()->count();
+        $this->assertEquals(3, $total);
+    }
+
+    public function testCopyByUser1()
+    {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => 1
+                ]
+            ]
+        ]);
+
+        $data = ['name' => 'Copied role'];
+        $this->post('/roles/copy/1', $data);
+
+        $this->assertRedirect('/roles/view/4');
+
+        $total = TableRegistry::get('Roles')->find()->count();
+        $this->assertEquals(4, $total);
+
+        $role = TableRegistry::get('Roles')->get(4);
+        $this->assertEquals(1, $role->created_by);
+        $this->assertNull($role->modified_by);
     }
 }

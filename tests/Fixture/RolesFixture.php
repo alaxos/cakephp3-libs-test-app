@@ -56,5 +56,13 @@ class RolesFixture extends TestFixture
             'modified' => '2017-03-16 16:25:07',
             'modified_by' => null
         ],
+        [
+            'id' => 3,
+            'name' => 'validateur',
+            'created' => '2017-03-16 14:30:00',
+            'created_by' => null,
+            'modified' => '2017-03-16 16:30:00',
+            'modified_by' => null
+        ],
     ];
 }
