@@ -53,15 +53,41 @@ class UsersFixture extends TestFixture
         [
             'id' => 1,
             'role_id' => 1,
-            'firstname' => 'Lorem ipsum dolor sit amet',
-            'lastname' => 'Lorem ipsum dolor sit amet',
-            'email' => 'Lorem ipsum dolor sit amet',
-            'external_uid' => 'Lorem ipsum dolor sit amet',
-            'last_login_date' => '2017-03-16 16:50:39',
-            'created' => '2017-03-16 16:50:39',
-            'created_by' => 1,
-            'modified' => '2017-03-16 16:50:39',
-            'modified_by' => 1
+            'firstname' => 'John',
+            'lastname' => 'Doe',
+            'email' => 'john@example.com',
+            'external_uid' => '123@example.com',
+            'last_login_date' => '2017-03-16 14:30:00',
+            'created' => '2017-03-16 14:42:24',
+            'created_by' => null,
+            'modified' => '2017-03-16 14:45:11',
+            'modified_by' => null
+        ],
+        [
+            'id' => 2,
+            'role_id' => 2,
+            'firstname' => 'Jack',
+            'lastname' => 'Dalton',
+            'email' => 'jack@example.com',
+            'external_uid' => '456@example.com',
+            'last_login_date' => '2017-03-01 11:15:00',
+            'created' => '2017-03-16 14:43:04',
+            'created_by' => null,
+            'modified' => '2017-03-16 14:45:24',
+            'modified_by' => null
+        ],
+        [
+            'id' => 3,
+            'role_id' => 2,
+            'firstname' => 'Jane',
+            'lastname' => 'Smith',
+            'email' => 'jane@example.com',
+            'external_uid' => '789@example.com',
+            'last_login_date' => null,
+            'created' => '2017-03-16 14:44:43',
+            'created_by' => null,
+            'modified' => '2017-03-16 14:44:43',
+            'modified_by' => null
         ],
     ];
 }
