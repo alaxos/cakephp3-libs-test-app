@@ -192,17 +192,6 @@ class RolesControllerTest extends IntegrationTestCase
         $this->assertResponseOk();
         $this->assertResponseContains('administrateur');
         $this->assertResponseNotContains('utilisateur');
-
-        /*
-         * Filter cleared if no referer
-         */
-        $this->configRequest([
-            'headers' => ['Referer' => '/']
-        ]);
-        $this->get('/roles');
-        $this->assertResponseOk();
-        $this->assertResponseContains('administrateur');
-        $this->assertResponseContains('utilisateur');
     }
 
     public function testIndexFilterClearedFromSomewhereElse()

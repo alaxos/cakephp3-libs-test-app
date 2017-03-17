@@ -115,25 +115,25 @@ class RolesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $role = $this->Roles->get($id);
-        
+
         try {
-            
+
             if ($this->Roles->delete($role)) {
-                $this->Flash->success(___('The role has been deleted'), ['plugin' => 'Alaxos']);
+                $this->Flash->success(__('The role has been deleted'), ['plugin' => 'Alaxos']);
             } else {
-                $this->Flash->error(___('The role could not be deleted. Please, try again.'), ['plugin' => 'Alaxos']);
+                $this->Flash->error(__('The role could not be deleted. Please, try again.'), ['plugin' => 'Alaxos']);
             }
-            
+
         } catch(\Exception $ex) {
-            
+
             if ($ex->getCode() == 23000) {
-                $this->Flash->error(___('The role could not be deleted as it is still used in the database'), ['plugin' => 'Alaxos']);
+                $this->Flash->error(__('The role could not be deleted as it is still used in the database'), ['plugin' => 'Alaxos']);
             } else {
                 $this->Flash->error(sprintf(__('The role could not be deleted: %s'), $ex->getMessage()), ['plugin' => 'Alaxos']);
             }
-            
+
         }
-        
+
         return $this->redirect(['action' => 'index']);
     }
 

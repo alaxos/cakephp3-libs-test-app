@@ -58,9 +58,9 @@ class UsersFixture extends TestFixture
             'email' => 'john@example.com',
             'external_uid' => '123@example.com',
             'last_login_date' => '2017-03-16 14:30:00',
-            'created' => '2017-03-16 14:42:24',
+            'created' => '2017-03-16 14:30:00',
             'created_by' => null,
-            'modified' => '2017-03-16 14:45:11',
+            'modified' => '2017-03-16 14:30:00',
             'modified_by' => null
         ],
         [
@@ -70,11 +70,11 @@ class UsersFixture extends TestFixture
             'lastname' => 'Dalton',
             'email' => 'jack@example.com',
             'external_uid' => '456@example.com',
-            'last_login_date' => '2017-03-01 11:15:00',
-            'created' => '2017-03-16 14:43:04',
+            'last_login_date' => '2017-03-05 11:15:00',
+            'created' => '2017-03-01 11:14:59',
             'created_by' => null,
-            'modified' => '2017-03-16 14:45:24',
-            'modified_by' => null
+            'modified' => '2017-03-05 11:15:00',
+            'modified_by' => 2
         ],
         [
             'id' => 3,

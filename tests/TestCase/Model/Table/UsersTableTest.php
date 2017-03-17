@@ -59,26 +59,8 @@ class UsersTableTest extends TestCase
      */
     public function testInitialize()
     {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test validationDefault method
-     *
-     * @return void
-     */
-    public function testValidationDefault()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test buildRules method
-     *
-     * @return void
-     */
-    public function testBuildRules()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->assertTrue($this->Users->behaviors()->has('Timestamp'));
+        $this->assertTrue($this->Users->behaviors()->has('UserLink'));
+        $this->assertTrue($this->Users->behaviors()->has('Timezoned'));
     }
 }
