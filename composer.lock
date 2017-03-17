@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a4428ff27a01dad57b2c3ffed0ee5140",
+    "content-hash": "0a04843f8836eff9834477c60322a1ec",
     "packages": [
         {
             "name": "alaxos/cakephp3-bootstrap-theme",
-            "version": "0.9.3",
+            "version": "1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alaxos/cakephp3-bootstrap-theme.git",
-                "reference": "831712ce05b4c1a1b1d9f615cdcf00a47db14ef7"
+                "reference": "2bedb404d844535dfd24e47e708bb810a6a0fdf4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alaxos/cakephp3-bootstrap-theme/zipball/831712ce05b4c1a1b1d9f615cdcf00a47db14ef7",
-                "reference": "831712ce05b4c1a1b1d9f615cdcf00a47db14ef7",
+                "url": "https://api.github.com/repos/alaxos/cakephp3-bootstrap-theme/zipball/2bedb404d844535dfd24e47e708bb810a6a0fdf4",
+                "reference": "2bedb404d844535dfd24e47e708bb810a6a0fdf4",
                 "shasum": ""
             },
             "require": {
@@ -47,20 +47,20 @@
                 "libraries",
                 "theme"
             ],
-            "time": "2016-03-24T15:56:13+00:00"
+            "time": "2017-03-17T10:22:51+00:00"
         },
         {
             "name": "alaxos/cakephp3-libs",
-            "version": "v1.1",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alaxos/cakephp3-libs.git",
-                "reference": "e126cf7f4416d0602c6141ac119afa95130e08e5"
+                "reference": "4873826370305a27e3b9be933be7fffada9893bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alaxos/cakephp3-libs/zipball/e126cf7f4416d0602c6141ac119afa95130e08e5",
-                "reference": "e126cf7f4416d0602c6141ac119afa95130e08e5",
+                "url": "https://api.github.com/repos/alaxos/cakephp3-libs/zipball/4873826370305a27e3b9be933be7fffada9893bd",
+                "reference": "4873826370305a27e3b9be933be7fffada9893bd",
                 "shasum": ""
             },
             "require": {
@@ -90,7 +90,7 @@
                 "cakephp",
                 "libraries"
             ],
-            "time": "2017-03-15T13:54:37+00:00"
+            "time": "2017-03-16T09:13:38+00:00"
         },
         {
             "name": "aura/intl",
@@ -971,16 +971,16 @@
     "packages-dev": [
         {
             "name": "cakephp/bake",
-            "version": "1.3.2",
+            "version": "1.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/bake.git",
-                "reference": "2eaae494000c02447ce4dd5529143b0a7d0f7c98"
+                "reference": "bfa50d866b41cdf2ed43a360a213c63b0cd955e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/bake/zipball/2eaae494000c02447ce4dd5529143b0a7d0f7c98",
-                "reference": "2eaae494000c02447ce4dd5529143b0a7d0f7c98",
+                "url": "https://api.github.com/repos/cakephp/bake/zipball/bfa50d866b41cdf2ed43a360a213c63b0cd955e7",
+                "reference": "bfa50d866b41cdf2ed43a360a213c63b0cd955e7",
                 "shasum": ""
             },
             "require": {
@@ -1014,20 +1014,20 @@
                 "bake",
                 "cakephp"
             ],
-            "time": "2017-03-10T01:55:50+00:00"
+            "time": "2017-03-15T20:24:03+00:00"
         },
         {
             "name": "cakephp/debug_kit",
-            "version": "3.9.2",
+            "version": "3.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/debug_kit.git",
-                "reference": "a4d4250bc4b1724f6a13f58caaaed2a1f8684c33"
+                "reference": "20562b25e58da1efae7050c6c995ffe11726ad9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/a4d4250bc4b1724f6a13f58caaaed2a1f8684c33",
-                "reference": "a4d4250bc4b1724f6a13f58caaaed2a1f8684c33",
+                "url": "https://api.github.com/repos/cakephp/debug_kit/zipball/20562b25e58da1efae7050c6c995ffe11726ad9a",
+                "reference": "20562b25e58da1efae7050c6c995ffe11726ad9a",
                 "shasum": ""
             },
             "require": {
@@ -1072,7 +1072,7 @@
                 "debug",
                 "kit"
             ],
-            "time": "2017-03-07T02:39:42+00:00"
+            "time": "2017-03-16T01:28:35+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -2766,16 +2766,16 @@
         },
         {
             "name": "sebastian/object-reflector",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/object-reflector.git",
-                "reference": "2201553542d60d25db9c5b2c54330df776648008"
+                "reference": "afd5797e7af7c9f529879ad5e8e8abe126c89dab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/object-reflector/zipball/2201553542d60d25db9c5b2c54330df776648008",
-                "reference": "2201553542d60d25db9c5b2c54330df776648008",
+                "url": "https://api.github.com/repos/sebastianbergmann/object-reflector/zipball/afd5797e7af7c9f529879ad5e8e8abe126c89dab",
+                "reference": "afd5797e7af7c9f529879ad5e8e8abe126c89dab",
                 "shasum": ""
             },
             "require": {
@@ -2787,7 +2787,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -2807,7 +2807,7 @@
             ],
             "description": "Allows reflection of object attributes, including inherited and non-public ones",
             "homepage": "https://github.com/sebastianbergmann/object-reflector/",
-            "time": "2017-03-12T15:10:22+00:00"
+            "time": "2017-03-16T14:05:21+00:00"
         },
         {
             "name": "sebastian/recursion-context",
