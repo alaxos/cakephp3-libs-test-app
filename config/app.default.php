@@ -39,7 +39,7 @@ return [
     'App' => [
         'namespace' => 'App',
         'encoding' => env('APP_ENCODING', 'UTF-8'),
-        'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
+        'defaultLocale' => env('APP_DEFAULT_LOCALE', 'fr_ch'),
         'base' => false,
         'dir' => 'src',
         'webroot' => 'webroot',
@@ -87,6 +87,7 @@ return [
             'className' => 'File',
             'path' => CACHE,
             'url' => env('CACHE_DEFAULT_URL', null),
+            'mask' => 0666
         ],
 
         /**
@@ -102,6 +103,7 @@ return [
             'serialize' => true,
             'duration' => '+1 years',
             'url' => env('CACHE_CAKECORE_URL', null),
+            'mask' => 0666
         ],
 
         /**
@@ -117,6 +119,7 @@ return [
             'serialize' => true,
             'duration' => '+1 years',
             'url' => env('CACHE_CAKEMODEL_URL', null),
+            'mask' => 0666
         ],
     ],
 
