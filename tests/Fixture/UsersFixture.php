@@ -45,27 +45,49 @@ class UsersFixture extends TestFixture
     // @codingStandardsIgnoreEnd
 
     /**
-     * Init method
+     * Records
      *
-     * @return void
+     * @var array
      */
-    public function init()
-    {
-        $this->records = [
-            [
-                'id' => 1,
-                'role_id' => 1,
-                'firstname' => 'Lorem ipsum dolor sit amet',
-                'lastname' => 'Lorem ipsum dolor sit amet',
-                'email' => 'Lorem ipsum dolor sit amet',
-                'external_uid' => 'Lorem ipsum dolor sit amet',
-                'last_login_date' => '2018-06-25 09:35:01',
-                'created' => '2018-06-25 09:35:01',
-                'created_by' => 1,
-                'modified' => '2018-06-25 09:35:01',
-                'modified_by' => 1
-            ],
-        ];
-        parent::init();
-    }
+    public $records = [
+        [
+            'id' => 1,
+            'role_id' => 1,
+            'firstname' => 'John',
+            'lastname' => 'Doe',
+            'email' => 'john@example.com',
+            'external_uid' => '123@example.com',
+            'last_login_date' => '2017-03-16 14:30:00',
+            'created' => '2017-03-16 14:30:00',
+            'created_by' => null,
+            'modified' => '2017-03-16 14:30:00',
+            'modified_by' => null
+        ],
+        [
+            'id' => 2,
+            'role_id' => 2,
+            'firstname' => 'Jack',
+            'lastname' => 'Dalton',
+            'email' => 'jack@example.com',
+            'external_uid' => '456@example.com',
+            'last_login_date' => '2017-03-05 11:15:00',
+            'created' => '2017-03-01 11:14:59',
+            'created_by' => null,
+            'modified' => '2017-03-05 11:15:00',
+            'modified_by' => 2
+        ],
+        [
+            'id' => 3,
+            'role_id' => 2,
+            'firstname' => 'Jane',
+            'lastname' => 'Smith',
+            'email' => 'jane@example.com',
+            'external_uid' => '789@example.com',
+            'last_login_date' => null,
+            'created' => '2017-03-16 14:44:43',
+            'created_by' => null,
+            'modified' => '2017-03-16 14:44:43',
+            'modified_by' => null
+        ],
+    ];
 }

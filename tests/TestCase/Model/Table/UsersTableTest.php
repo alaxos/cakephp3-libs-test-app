@@ -25,7 +25,7 @@ class UsersTableTest extends TestCase
      */
     public $fixtures = [
         'app.users',
-        'app.roles'
+        'app.roles',
     ];
 
     /**
@@ -36,8 +36,8 @@ class UsersTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::getTableLocator()->exists('Users') ? [] : ['className' => UsersTable::class];
-        $this->Users = TableRegistry::getTableLocator()->get('Users', $config);
+        $config = TableRegistry::exists('Users') ? [] : ['className' => 'App\Model\Table\UsersTable'];
+        $this->Users = TableRegistry::get('Users', $config);
     }
 
     /**
@@ -59,26 +59,8 @@ class UsersTableTest extends TestCase
      */
     public function testInitialize()
     {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test validationDefault method
-     *
-     * @return void
-     */
-    public function testValidationDefault()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test buildRules method
-     *
-     * @return void
-     */
-    public function testBuildRules()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->assertTrue($this->Users->behaviors()->has('Timestamp'));
+        $this->assertTrue($this->Users->behaviors()->has('UserLink'));
+        $this->assertTrue($this->Users->behaviors()->has('Timezoned'));
     }
 }
