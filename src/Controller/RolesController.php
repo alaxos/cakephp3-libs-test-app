@@ -2,12 +2,15 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Core\Exception\Exception;
 
 /**
  * Roles Controller
  *
  * @property \App\Model\Table\RolesTable $Roles
  * @property \Alaxos\Controller\Component\FilterComponent $Filter
+ *
+ * @method \App\Model\Entity\Role[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class RolesController extends AppController
 {
@@ -29,109 +32,94 @@ class RolesController extends AppController
     /**
      * Index method
      *
-     * @return \Cake\Network\Response|null
+     * @return \Cake\Http\Response|void
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Creator', 'Editor']
+        ];
         $roles = $this->paginate($this->Filter->getFilterQuery());
 
+
         $this->set(compact('roles'));
-        $this->set('_serialize', ['roles']);
     }
 
     /**
      * View method
      *
      * @param string|null $id Role id.
-     * @return \Cake\Network\Response|null
+     * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
     {
         $role = $this->Roles->get($id, [
-            'contain' => ['Users']
+            'contain' => ['Creator', 'Editor', 'Users']
         ]);
 
         $this->set('role', $role);
-        $this->set('_serialize', ['role']);
     }
 
     /**
      * Add method
      *
-     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
+     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
     public function add()
     {
         $role = $this->Roles->newEntity();
-        if ($this->request->is('post')) {
-            $role = $this->Roles->patchEntity($role, $this->request->getData());
+        if ($this->getRequest()->is('post')) {
+            $role = $this->Roles->patchEntity($role, $this->getRequest()->getData());
             if ($this->Roles->save($role)) {
                 $this->Flash->success(__('The role has been saved.'), ['plugin' => 'Alaxos']);
 
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The role could not be saved. Please, try again.'), ['plugin' => 'Alaxos']);
+                return $this->redirect(['action' => 'view', $role->id]);
             }
+            $this->Flash->error(__('The role could not be saved. Please, try again.'), ['plugin' => 'Alaxos']);
         }
         $this->set(compact('role'));
-        $this->set('_serialize', ['role']);
     }
 
     /**
      * Edit method
      *
      * @param string|null $id Role id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null)
     {
         $role = $this->Roles->get($id, [
             'contain' => []
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $role = $this->Roles->patchEntity($role, $this->request->getData());
+        if ($this->getRequest()->is(['patch', 'post', 'put'])) {
+            $role = $this->Roles->patchEntity($role, $this->getRequest()->getData());
             if ($this->Roles->save($role)) {
                 $this->Flash->success(__('The role has been saved.'), ['plugin' => 'Alaxos']);
 
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The role could not be saved. Please, try again.'), ['plugin' => 'Alaxos']);
+                return $this->redirect(['action' => 'view', $role->id]);
             }
+            $this->Flash->error(__('The role could not be saved. Please, try again.'), ['plugin' => 'Alaxos']);
         }
         $this->set(compact('role'));
-        $this->set('_serialize', ['role']);
     }
 
     /**
      * Delete method
      *
      * @param string|null $id Role id.
-     * @return \Cake\Network\Response|null Redirects to index.
+     * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->getRequest()->allowMethod(['post', 'delete']);
         $role = $this->Roles->get($id);
-
-        try {
-
-            if ($this->Roles->delete($role)) {
-                $this->Flash->success(__('The role has been deleted'), ['plugin' => 'Alaxos']);
-            } else {
-                $this->Flash->error(__('The role could not be deleted. Please, try again.'), ['plugin' => 'Alaxos']);
-            }
-
-        } catch(\Exception $ex) {
-
-            if ($ex->getCode() == 23000) {
-                $this->Flash->error(__('The role could not be deleted as it is still used in the database'), ['plugin' => 'Alaxos']);
-            } else {
-                $this->Flash->error(sprintf(__('The role could not be deleted: %s'), $ex->getMessage()), ['plugin' => 'Alaxos']);
-            }
-
+        if ($this->Roles->delete($role)) {
+            $this->Flash->success(__('The role has been deleted.'), ['plugin' => 'Alaxos']);
+        } else {
+            $this->Flash->error(__('The role could not be deleted. Please, try again.'), ['plugin' => 'Alaxos']);
         }
 
         return $this->redirect(['action' => 'index']);
@@ -139,83 +127,65 @@ class RolesController extends AppController
 
     /**
      * Delete all method
+     *
+     * @param string|null $id Role id.
+     * @return \Cake\Http\Response|null Redirects to index.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function deleteAll() {
+    public function deleteAll($id = null)
+    {
+        $this->getRequest()->allowMethod(['post', 'delete']);
 
-        $this->request->allowMethod('post', 'delete');
+        $checked_ids = $this->getRequest()->getData('checked_ids');
+        if(!empty($checked_ids)){
 
-        if($this->request->getData('checked_ids') !== null && !empty($this->request->getData('checked_ids'))){
+            $query = $this->Roles->query();
+            $query->delete()->where(['id IN' => $checked_ids]);
 
-            $roles = $this->Roles->find()->where(['id IN' => $this->request->getData('checked_ids')]);
-
-            $total         = $roles->count();
-            $total_deleted = 0;
-
-            foreach($roles as $role) {
-
-                try {
-
-                    if ($this->Roles->delete($role)) {
-                        $total_deleted++;
+            try{
+                if ($statement = $query->execute()) {
+                    $deleted_total = $statement->rowCount();
+                    if($deleted_total == 1){
+                        $this->Flash->set(___('The selected role has been deleted.'), ['element' => 'Alaxos.success']);
                     }
-
-                } catch(\Exception $ex) {
-                    $this->log($ex);
-                }
-
-            }
-
-            if ($total_deleted == $total) {
-
-                if ($total_deleted == 1) {
-                    $this->Flash->success(__('The selected role has been deleted.'), ['plugin' => 'Alaxos']);
-                } elseif ($total_deleted > 1) {
-                    $this->Flash->success(sprintf(__('The %s selected roles have been deleted.'), $total_deleted), ['plugin' => 'Alaxos']);
-                }
-
-            } else {
-
-                if ($total_deleted == 0) {
-                    $this->Flash->error(__('The selected roles could not be deleted. Please, try again.'), ['plugin' => 'Alaxos']);
+                    elseif($deleted_total > 1){
+                        $this->Flash->set(sprintf(__('The %s selected roles have been deleted.'), $deleted_total), ['element' => 'Alaxos.success']);
+                    }
                 } else {
-                    $this->Flash->error(sprintf(__('Only %s selected roles on %s could be deleted'), $total_deleted, $total), ['plugin' => 'Alaxos']);
+                    $this->Flash->set(___('The selected roles could not be deleted. Please, try again.'), ['element' => 'Alaxos.error']);
                 }
-
+            } catch(Exception $ex){
+                $this->Flash->set(___('The selected roles could not be deleted. Please, try again.'), ['element' => 'Alaxos.error', 'params' => ['exception_message' => $ex->getMessage()]]);
             }
 
         } else {
-            $this->Flash->error(__('There was no role to delete'), ['plugin' => 'Alaxos']);
+            $this->Flash->set(___('There was no role to delete'), ['element' => 'Alaxos.error']);
         }
 
         return $this->redirect(['action' => 'index']);
     }
 
     /**
-     * Copy method
+     * Edit method
      *
      * @param string|null $id Role id.
-     * @return \Cake\Network\Response|void Redirects on successful copy, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function copy($id = null)
     {
         $role = $this->Roles->get($id, [
             'contain' => []
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $role = $this->Roles->newEntity();
-            $role = $this->Roles->patchEntity($role, $this->request->getData());
+        if ($this->getRequest()->is(['patch', 'post', 'put'])) {
+            $role = $this->Roles->patchEntity($role, $this->getRequest()->getData());
             if ($this->Roles->save($role)) {
-                $this->Flash->success(__('The role has been saved'), ['plugin' => 'Alaxos']);
+                $this->Flash->success(__('The role has been saved.'), ['plugin' => 'Alaxos']);
+
                 return $this->redirect(['action' => 'view', $role->id]);
-            } else {
-                $this->Flash->error(__('The role could not be saved. Please, try again.'), ['plugin' => 'Alaxos']);
             }
+            $this->Flash->error(__('The role could not be saved. Please, try again.'), ['plugin' => 'Alaxos']);
         }
-
-
-        $role->id = $id;
         $this->set(compact('role'));
-        $this->set('_serialize', ['role']);
     }
 }

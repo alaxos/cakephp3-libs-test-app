@@ -1,11 +1,10 @@
 <?php
 /**
-  * @var \App\View\AppView $this
-  */
+ * @var \App\View\AppView $this
+ * @var \App\Model\Entity\Role $role
+ */
 ?>
-
 <div class="roles form">
-
     <fieldset>
         <legend><?= ___('add role') ?></legend>
 
@@ -23,13 +22,13 @@
             echo '<div class="form-group">';
             echo $this->AlaxosForm->label('name', __('name'), ['class' => 'col-sm-2 control-label']);
             echo '<div class="col-sm-5">';
-            echo $this->AlaxosForm->input('name', ['label' => false, 'class' => 'form-control']);
+            echo $this->AlaxosForm->control('name', ['label' => false, 'class' => 'form-control']);
             echo '</div>';
             echo '</div>';
 
             echo '<div class="form-group">';
             echo '<div class="col-sm-offset-2 col-sm-5">';
-            echo $this->AlaxosForm->button(___d('alaxos', 'submit'), ['class' => 'btn btn-default']);
+            echo $this->AlaxosForm->button(___('submit'), ['class' => 'btn btn-default']);
             echo '</div>';
             echo '</div>';
 
@@ -37,7 +36,5 @@
             ?>
             </div>
         </div>
-
-    </fieldset>
-
+    <fieldset>
 </div>

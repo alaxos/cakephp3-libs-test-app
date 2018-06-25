@@ -35,34 +35,22 @@ class RolesFixture extends TestFixture
     // @codingStandardsIgnoreEnd
 
     /**
-     * Records
+     * Init method
      *
-     * @var array
+     * @return void
      */
-    public $records = [
-        [
-            'id' => 1,
-            'name' => 'administrateur',
-            'created' => '2017-03-10 14:39:09',
-            'created_by' => null,
-            'modified' => '2017-03-10 14:39:09',
-            'modified_by' => null
-        ],
-        [
-            'id' => 2,
-            'name' => 'utilisateur',
-            'created' => '2017-03-16 14:39:16',
-            'created_by' => null,
-            'modified' => '2017-03-16 16:25:07',
-            'modified_by' => null
-        ],
-        [
-            'id' => 3,
-            'name' => 'validateur',
-            'created' => '2017-03-16 14:30:00',
-            'created_by' => null,
-            'modified' => '2017-03-16 16:30:00',
-            'modified_by' => null
-        ],
-    ];
+    public function init()
+    {
+        $this->records = [
+            [
+                'id' => 1,
+                'name' => 'Lorem ipsum dolor sit amet',
+                'created' => '2018-06-25 09:34:58',
+                'created_by' => 1,
+                'modified' => '2018-06-25 09:34:58',
+                'modified_by' => 1
+            ],
+        ];
+        parent::init();
+    }
 }

@@ -1,8 +1,8 @@
 <?php
 namespace App\Model\Entity;
+use Alaxos\Model\Entity\TimezonedTrait;
 
 use Cake\ORM\Entity;
-use Alaxos\Model\Entity\TimezonedTrait;
 
 /**
  * Role Entity
@@ -32,7 +32,13 @@ class Role extends Entity
      * @var array
      */
     protected $_accessible = [
-        '*' => true,
-        'id' => false
+        'name' => true,
+        'created' => true,
+        'created_by' => true,
+        'modified' => true,
+        'modified_by' => true,
+        'creator' => true,
+        'editor' => true,
+        'users' => true
     ];
 }

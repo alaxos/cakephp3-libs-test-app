@@ -1,26 +1,30 @@
 <?php
 namespace App\Model\Table;
 
+use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\I18n\Time;
+use Cake\Core\Exception\Exception;
 
 /**
  * Users Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Roles
+ * @property \App\Model\Table\RolesTable|\Cake\ORM\Association\BelongsTo $Roles
  *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\User[] newEntities(array $data, array $options = [])
  * @method \App\Model\Entity\User|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\User|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\User patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\User[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\User findOrCreate($search, callable $callback = null)
+ * @method \App\Model\Entity\User findOrCreate($search, callable $callback = null, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class UsersTable extends Table
+class UsersTable extends AppTable
 {
 
     /**
@@ -60,10 +64,14 @@ class UsersTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
+            ->scalar('firstname')
+            ->maxLength('firstname', 100)
             ->requirePresence('firstname', 'create')
             ->notEmpty('firstname');
 
         $validator
+            ->scalar('lastname')
+            ->maxLength('lastname', 100)
             ->requirePresence('lastname', 'create')
             ->notEmpty('lastname');
 
@@ -74,6 +82,8 @@ class UsersTable extends Table
             ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
+            ->scalar('external_uid')
+            ->maxLength('external_uid', 100)
             ->requirePresence('external_uid', 'create')
             ->notEmpty('external_uid')
             ->add('external_uid', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
@@ -107,5 +117,18 @@ class UsersTable extends Table
         $rules->add($rules->existsIn(['role_id'], 'Roles'));
 
         return $rules;
+    }
+
+    public function setLastLoginDate($id)
+    {
+        try {
+            $user = $this->get($id);
+
+            $user->last_login_date = Time::now();
+
+            return $this->save($user);
+        } catch (Exception $ex) {
+            return false;
+        }
     }
 }

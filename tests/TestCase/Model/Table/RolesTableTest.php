@@ -25,6 +25,8 @@ class RolesTableTest extends TestCase
      */
     public $fixtures = [
         'app.roles',
+        'app.creator',
+        'app.editor',
         'app.users'
     ];
 
@@ -36,8 +38,8 @@ class RolesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Roles') ? [] : ['className' => 'App\Model\Table\RolesTable'];
-        $this->Roles = TableRegistry::get('Roles', $config);
+        $config = TableRegistry::getTableLocator()->exists('Roles') ? [] : ['className' => RolesTable::class];
+        $this->Roles = TableRegistry::getTableLocator()->get('Roles', $config);
     }
 
     /**
@@ -59,8 +61,26 @@ class RolesTableTest extends TestCase
      */
     public function testInitialize()
     {
-        $this->assertTrue($this->Roles->behaviors()->has('Timestamp'));
-        $this->assertTrue($this->Roles->behaviors()->has('UserLink'));
-        $this->assertTrue($this->Roles->behaviors()->has('Timezoned'));
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test validationDefault method
+     *
+     * @return void
+     */
+    public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
     }
 }

@@ -1,8 +1,8 @@
 <?php
 namespace App\Model\Entity;
+use Alaxos\Model\Entity\TimezonedTrait;
 
 use Cake\ORM\Entity;
-use Alaxos\Model\Entity\TimezonedTrait;
 
 /**
  * User Entity
@@ -19,8 +19,6 @@ use Alaxos\Model\Entity\TimezonedTrait;
  * @property \Cake\I18n\Time $modified
  * @property int $modified_by
  *
- * @property \App\Model\Entity\User $creator
- * @property \App\Model\Entity\User $editor
  * @property \App\Model\Entity\Role $role
  */
 class User extends Entity
@@ -37,7 +35,16 @@ class User extends Entity
      * @var array
      */
     protected $_accessible = [
-        '*' => true,
-        'id' => false
+        'role_id' => true,
+        'firstname' => true,
+        'lastname' => true,
+        'email' => true,
+        'external_uid' => true,
+        'last_login_date' => true,
+        'created' => true,
+        'created_by' => true,
+        'modified' => true,
+        'modified_by' => true,
+        'role' => true
     ];
 }
