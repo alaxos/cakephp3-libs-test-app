@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Core\Exception\Exception;
+use Cake\Core\Configure;
 
 /**
  * Roles Controller
@@ -116,10 +117,22 @@ class RolesController extends AppController
     {
         $this->getRequest()->allowMethod(['post', 'delete']);
         $role = $this->Roles->get($id);
-        if ($this->Roles->delete($role)) {
-            $this->Flash->success(__('The role has been deleted.'), ['plugin' => 'Alaxos']);
-        } else {
-            $this->Flash->error(__('The role could not be deleted. Please, try again.'), ['plugin' => 'Alaxos']);
+        try {
+            if ($this->Roles->delete($role)) {
+                $this->Flash->success(__('The role has been deleted.'), ['plugin' => 'Alaxos']);
+            } else {
+                $this->Flash->error(__('The role could not be deleted. Please, try again.'), ['plugin' => 'Alaxos']);
+            }
+        } catch (\Exception $ex) {
+            if ($ex->getCode() == 23000) {
+                $this->Flash->error(___('The role could not be deleted as it is still used in the database'), ['plugin' => 'Alaxos']);
+            } else {
+                if (Configure::read('debug')) {
+                    $this->Flash->error(sprintf(___('The role could not be deleted: %s'), $ex->getMessage()), ['plugin' => 'Alaxos']);
+                } else {
+                    $this->Flash->error(__('The role could not be deleted. Please, try again.'), ['plugin' => 'Alaxos']);
+                }
+            }
         }
 
         return $this->redirect(['action' => 'index']);
@@ -137,25 +150,32 @@ class RolesController extends AppController
         $this->getRequest()->allowMethod(['post', 'delete']);
 
         $checked_ids = $this->getRequest()->getData('checked_ids');
-        if(!empty($checked_ids)){
+        if (!empty($checked_ids)) {
 
             $query = $this->Roles->query();
             $query->delete()->where(['id IN' => $checked_ids]);
 
-            try{
+            try {
                 if ($statement = $query->execute()) {
                     $deleted_total = $statement->rowCount();
-                    if($deleted_total == 1){
+                    if ($deleted_total == 1) {
                         $this->Flash->set(___('The selected role has been deleted.'), ['element' => 'Alaxos.success']);
-                    }
-                    elseif($deleted_total > 1){
+                    } elseif ($deleted_total > 1) {
                         $this->Flash->set(sprintf(__('The %s selected roles have been deleted.'), $deleted_total), ['element' => 'Alaxos.success']);
                     }
                 } else {
                     $this->Flash->set(___('The selected roles could not be deleted. Please, try again.'), ['element' => 'Alaxos.error']);
                 }
-            } catch(Exception $ex){
-                $this->Flash->set(___('The selected roles could not be deleted. Please, try again.'), ['element' => 'Alaxos.error', 'params' => ['exception_message' => $ex->getMessage()]]);
+            } catch (\Exception $ex) {
+                if ($ex->getCode() == 23000) {
+                    $this->Flash->error(___('The roles could not be deleted as some of them are still used in the database'), ['plugin' => 'Alaxos']);
+                } else {
+                    if (Configure::read('debug')) {
+                        $this->Flash->set(___('The selected roles could not be deleted. Please, try again.'), ['element' => 'Alaxos.error', 'params' => ['exception_message' => $ex->getMessage()]]);
+                    } else {
+                        $this->Flash->set(___('The selected roles could not be deleted. Please, try again.'), ['element' => 'Alaxos.error']);
+                    }
+                }
             }
 
         } else {
@@ -177,8 +197,10 @@ class RolesController extends AppController
         $role = $this->Roles->get($id, [
             'contain' => []
         ]);
-        if ($this->getRequest()->is(['patch', 'post', 'put'])) {
-            $role = $this->Roles->patchEntity($role, $this->getRequest()->getData());
+        $role->isNew(true);
+
+        if ($this->getRequest()->is(['post'])) {
+            $role = $this->Roles->newEntity($this->getRequest()->getData());
             if ($this->Roles->save($role)) {
                 $this->Flash->success(__('The role has been saved.'), ['plugin' => 'Alaxos']);
 

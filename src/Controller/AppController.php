@@ -67,6 +67,8 @@ class AppController extends Controller
         $this->loadComponent('Alaxos.Logger', ['days_to_keep_logs' => 30]);
         $this->loadComponent('Alaxos.UserLink');
 
+        $this->Logger->setConfig('log_categories.login', 4);
+
         $this->Auth->allow();
     }
 

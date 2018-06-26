@@ -47,4 +47,9 @@ class User extends Entity
         'modified_by' => true,
         'role' => true
     ];
+
+    public function _getFullname()
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
 }

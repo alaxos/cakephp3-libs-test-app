@@ -233,4 +233,17 @@ Configure::write('default_display_timezone', 'Europe/Zurich');
 Plugin::load('Alaxos', ['bootstrap' => true]);
 Plugin::load('Alaxos/BootstrapTheme');
 
+define('ROLE_ID_ADMINISTRATOR', 1);
+define('ROLE_ID_USER',          2);
+
 Configure::write('website_languages', ['fr-ch', 'de-ch', 'en-en']);
+
+Configure::write('Shibboleth.unique_id_attribute',         'uniqueID');
+Configure::write('Shibboleth.attributes_mapping',          [Configure::read('Shibboleth.unique_id_attribute') => 'external_uid',
+                                                            'persistent-id'                                   => 'targeted_uid',
+                                                            'givenName'                                       => 'firstname',
+                                                            'surname'                                         => 'lastname',
+                                                            'mail'                                            => 'email',
+                                                            'homeOrganization'                                => 'organisation',
+                                                            'preferredLanguage'                               => 'prefered_language']);
+Configure::write('Shibboleth.updatable_properties',        ['firstname', 'lastname', 'organisation', 'prefered_language']);

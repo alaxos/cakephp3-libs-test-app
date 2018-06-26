@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Core\Exception\Exception;
+use Cake\Core\Configure;
 use Cake\Event\Event;
 
 /**
@@ -127,10 +128,22 @@ class UsersController extends AppController
     {
         $this->getRequest()->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
-        if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'), ['plugin' => 'Alaxos']);
-        } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'), ['plugin' => 'Alaxos']);
+        try {
+            if ($this->Users->delete($user)) {
+                $this->Flash->success(__('The user has been deleted.'), ['plugin' => 'Alaxos']);
+            } else {
+                $this->Flash->error(__('The user could not be deleted. Please, try again.'), ['plugin' => 'Alaxos']);
+            }
+        } catch (\Exception $ex) {
+            if ($ex->getCode() == 23000) {
+                $this->Flash->error(___('The user could not be deleted as it is still used in the database'), ['plugin' => 'Alaxos']);
+            } else {
+                if (Configure::read('debug')) {
+                    $this->Flash->error(sprintf(___('The user could not be deleted: %s'), $ex->getMessage()), ['plugin' => 'Alaxos']);
+                } else {
+                    $this->Flash->error(__('The user could not be deleted. Please, try again.'), ['plugin' => 'Alaxos']);
+                }
+            }
         }
 
         return $this->redirect(['action' => 'index']);
@@ -148,25 +161,32 @@ class UsersController extends AppController
         $this->getRequest()->allowMethod(['post', 'delete']);
 
         $checked_ids = $this->getRequest()->getData('checked_ids');
-        if(!empty($checked_ids)){
+        if (!empty($checked_ids)) {
 
             $query = $this->Users->query();
             $query->delete()->where(['id IN' => $checked_ids]);
 
-            try{
+            try {
                 if ($statement = $query->execute()) {
                     $deleted_total = $statement->rowCount();
-                    if($deleted_total == 1){
+                    if ($deleted_total == 1) {
                         $this->Flash->set(___('The selected user has been deleted.'), ['element' => 'Alaxos.success']);
-                    }
-                    elseif($deleted_total > 1){
+                    } elseif ($deleted_total > 1) {
                         $this->Flash->set(sprintf(__('The %s selected users have been deleted.'), $deleted_total), ['element' => 'Alaxos.success']);
                     }
                 } else {
                     $this->Flash->set(___('The selected users could not be deleted. Please, try again.'), ['element' => 'Alaxos.error']);
                 }
-            } catch(Exception $ex){
-                $this->Flash->set(___('The selected users could not be deleted. Please, try again.'), ['element' => 'Alaxos.error', 'params' => ['exception_message' => $ex->getMessage()]]);
+            } catch (\Exception $ex) {
+                if ($ex->getCode() == 23000) {
+                    $this->Flash->error(___('The users could not be deleted as some of them are still used in the database'), ['plugin' => 'Alaxos']);
+                } else {
+                    if (Configure::read('debug')) {
+                        $this->Flash->set(___('The selected users could not be deleted. Please, try again.'), ['element' => 'Alaxos.error', 'params' => ['exception_message' => $ex->getMessage()]]);
+                    } else {
+                        $this->Flash->set(___('The selected users could not be deleted. Please, try again.'), ['element' => 'Alaxos.error']);
+                    }
+                }
             }
 
         } else {
@@ -241,14 +261,7 @@ class UsersController extends AppController
                     $this->Flash->success(__('You have been authenticated'), ['plugin' => 'Alaxos']);
                 }
 
-                /*
-                 * Check if we have to get a new OAuth token
-                 */
-                if (!isset($logged_user['access_token']) || empty($logged_user['access_token']) || (isset($logged_user['access_token_expires']) && $logged_user['access_token_expires']->isPast())) {
-                    $this->redirect(['action' => 'oauth', 'provider' => 'dlcm']);
-                } else {
-                    $this->redirect($this->Auth->redirectUrl());
-                }
+                $this->redirect($this->Auth->redirectUrl());
 
             } else {
 
