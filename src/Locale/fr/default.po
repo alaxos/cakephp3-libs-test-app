@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CakePHP3-libs-test\n"
-"POT-Creation-Date: 2017-03-16 10:19+0100\n"
-"PO-Revision-Date: 2017-03-16 10:25+0100\n"
+"POT-Creation-Date: 2018-12-18 15:55+0100\n"
+"PO-Revision-Date: 2018-12-18 16:01+0100\n"
 "Last-Translator: Nicolas Rod <nicolas.rod@unige.ch>\n"
 "Language-Team: fr <nicolas.rod@unige.ch>\n"
 "Language: fr\n"
@@ -27,132 +27,156 @@ msgstr ""
 "X-Poedit-SearchPath-6: plugins\n"
 "X-Poedit-SearchPath-7: config\n"
 
-#: src/Controller/RolesController.php:70 src/Controller/RolesController.php:96
+#: src/Controller/AppController.php:143
+msgid "you are not authorized to access this page"
+msgstr "vous n'êtes pas autorisé à accéder à cette page"
+
+#: src/Controller/RolesController.php:74 src/Controller/RolesController.php:98
+#: src/Controller/RolesController.php:203
 msgid "The role has been saved."
 msgstr "Le rôle a été enregistré."
 
-#: src/Controller/RolesController.php:74 src/Controller/RolesController.php:100
-#: src/Controller/RolesController.php:212
+#: src/Controller/RolesController.php:78 src/Controller/RolesController.php:102
+#: src/Controller/RolesController.php:207
 msgid "The role could not be saved. Please, try again."
 msgstr "Le rôle n'a pas pu être enregistré. Veuillez réessayer."
 
-#: src/Controller/RolesController.php:122
-msgid "The role has been deleted"
-msgstr "Le rôle a été effacé"
+#: src/Controller/RolesController.php:120
+msgid "The role has been deleted."
+msgstr "Le rôle a été effacé."
 
-#: src/Controller/RolesController.php:124
+#: src/Controller/RolesController.php:122
+#: src/Controller/RolesController.php:131
 msgid "The role could not be deleted. Please, try again."
 msgstr "Le rôle n'a pas pu être effacé. Veuillez réessayer."
 
-#: src/Controller/RolesController.php:130
+#: src/Controller/RolesController.php:126
 msgid "The role could not be deleted as it is still used in the database"
 msgstr ""
 "Le rôle n'a pas pu être effacé car il est encore utilisé dans la base de "
 "données"
 
-#: src/Controller/RolesController.php:132
+#: src/Controller/RolesController.php:129
 #, php-format
 msgid "The role could not be deleted: %s"
 msgstr "Le rôle n'a pas pu être effacé: %s"
 
-#: src/Controller/RolesController.php:171
+#: src/Controller/RolesController.php:160
 msgid "The selected role has been deleted."
 msgstr "Le rôle sélectionné a été effacé."
 
-#: src/Controller/RolesController.php:173
+#: src/Controller/RolesController.php:162
 #, php-format
 msgid "The %s selected roles have been deleted."
 msgstr "Les %s rôles sélectionnés ont été effacés."
 
-#: src/Controller/RolesController.php:179
+#: src/Controller/RolesController.php:165
+#: src/Controller/RolesController.php:172
+#: src/Controller/RolesController.php:174
 msgid "The selected roles could not be deleted. Please, try again."
 msgstr "Les rôles sélectionnés n'ont pas pu être effacés. Veuillez réessayer."
 
-#: src/Controller/RolesController.php:181
-#, php-format
-msgid "Only %s selected roles on %s could be deleted"
-msgstr "Seuls %s rôles sélectionnés sur %s ont pu être effacés"
+#: src/Controller/RolesController.php:169
+msgid ""
+"The roles could not be deleted as some of them are still used in the database"
+msgstr ""
+"Les rôles n'ont pas pu être effacés car certains d'entre eux sont encore "
+"utilisés dans la base de données"
 
-#: src/Controller/RolesController.php:187
+#: src/Controller/RolesController.php:180
 msgid "There was no role to delete"
 msgstr "Aucun rôle à effacer trouvé"
 
-#: src/Controller/RolesController.php:209
-msgid "The role has been saved"
-msgstr "Le rôle a été enregistré"
-
-#: src/Controller/UsersController.php:73 src/Controller/UsersController.php:100
+#: src/Controller/UsersController.php:83 src/Controller/UsersController.php:108
+#: src/Controller/UsersController.php:214
 msgid "The user has been saved."
 msgstr "L'utilisateur a été enregistré"
 
-#: src/Controller/UsersController.php:77 src/Controller/UsersController.php:104
-#: src/Controller/UsersController.php:217
+#: src/Controller/UsersController.php:87 src/Controller/UsersController.php:112
+#: src/Controller/UsersController.php:218
 msgid "The user could not be saved. Please, try again."
 msgstr "L'utilisateur n'a pas pu être enregistré. Veuillez réessayer."
 
-#: src/Controller/UsersController.php:127
-msgid "The user has been deleted"
-msgstr "L'utilisateur a été effacé"
+#: src/Controller/UsersController.php:131
+msgid "The user has been deleted."
+msgstr "L'utilisateur a été effacé."
 
-#: src/Controller/UsersController.php:129
+#: src/Controller/UsersController.php:133
+#: src/Controller/UsersController.php:142
 msgid "The user could not be deleted. Please, try again."
 msgstr "L'utilisateur n'a pas pu être effacé. Veuillez réessayer."
 
-#: src/Controller/UsersController.php:135
+#: src/Controller/UsersController.php:137
 msgid "The user could not be deleted as it is still used in the database"
 msgstr ""
 "L'utilisateur n'a pas pu être effacé car il est encore utilisé dans la base "
 "de données"
 
-#: src/Controller/UsersController.php:137
+#: src/Controller/UsersController.php:140
 #, php-format
 msgid "The user could not be deleted: %s"
 msgstr "l'utilisateur n'a pas pu être effacé: %s"
 
-#: src/Controller/UsersController.php:176
+#: src/Controller/UsersController.php:171
 msgid "The selected user has been deleted."
 msgstr "L'utilisateur sélectionné a été effacé."
 
-#: src/Controller/UsersController.php:178
+#: src/Controller/UsersController.php:173
 #, php-format
 msgid "The %s selected users have been deleted."
 msgstr "Les %s utilisateurs sélectionnés ont été effacés."
 
-#: src/Controller/UsersController.php:184
+#: src/Controller/UsersController.php:176
+#: src/Controller/UsersController.php:183
+#: src/Controller/UsersController.php:185
 msgid "The selected users could not be deleted. Please, try again."
 msgstr ""
 "Les utilisateurs sélectionnés n'ont pas pu être effacés. Veuillez réessayer."
 
-#: src/Controller/UsersController.php:186
-#, php-format
-msgid "Only %s selected users on %s could be deleted"
-msgstr "Seuls %s utilisateurs sélectionnés sur %s ont pu être effacés"
+#: src/Controller/UsersController.php:180
+msgid ""
+"The users could not be deleted as some of them are still used in the database"
+msgstr ""
+"Les utilisateurs n'ont pas pu être effacés car certains d'entre eux sont "
+"encore utilisés dans la base de données"
 
-#: src/Controller/UsersController.php:192
+#: src/Controller/UsersController.php:191
 msgid "There was no user to delete"
 msgstr "Aucun utilisateur à effacer"
 
-#: src/Controller/UsersController.php:214
-msgid "The user has been saved"
-msgstr "L'utilisateur a été enregistré"
+#: src/Controller/UsersController.php:257
+msgid "Your account has been created"
+msgstr "Votre compte a été créé"
 
-#: src/Template/Element/menus/top.ctp:6
-msgid "profiles"
-msgstr "profils"
+#: src/Controller/UsersController.php:259
+msgid "You have been authenticated"
+msgstr "Vous êtes maintenant authentifié"
 
-#: src/Template/Element/menus/top.ctp:8 src/Template/Users/index.ctp:3
+#: src/Controller/UsersController.php:266
+msgid "unable to login"
+msgstr "impossible de se loguer"
+
+#: src/Controller/UsersController.php:272
+msgid "you are already logged in"
+msgstr "vous êtes déjà logué"
+
+#: src/Controller/UsersController.php:283
+msgid "You have been logged out"
+msgstr "Vous êtes maintenant déconnecté"
+
+#: src/Template/Element/menus/top.ctp:20
 msgid "users"
 msgstr "utilisateurs"
 
-#: src/Template/Element/menus/top.ctp:13 src/Template/Roles/index.ctp:3
+#: src/Template/Element/menus/top.ctp:26
 msgid "roles"
 msgstr "rôles"
 
-#: src/Template/Element/menus/top.ctp:24
+#: src/Template/Element/menus/top.ctp:36
 msgid "logout"
 msgstr "déconnexion"
 
-#: src/Template/Element/menus/top.ctp:32
+#: src/Template/Element/menus/top.ctp:44
 msgid "login"
 msgstr "connexion"
 
@@ -172,91 +196,201 @@ msgstr "Erreur"
 msgid "Back"
 msgstr "Retour"
 
-#: src/Template/Pages/home.ctp:4
-msgid "test application for CakePHP 3.x"
-msgstr "CakePHP v3.x application test"
+#: src/Template/Pages/home.ctp:3
+msgid "CakePHP test application"
+msgstr "CakePHP application test"
 
-#: src/Template/Roles/add.ctp:10
+#: src/Template/Pages/home.ctp:7
+msgid ""
+"This sample application can be used to test code of the <code>alaxos/"
+"cakephp3-libs</code> plugin and the <code>alaxos/cakephp3-bootstrap-theme</"
+"code>."
+msgstr ""
+"Cet exemple d'application peut être utilisé pour tester le code du plugin "
+"<code>alaxos/cakephp3-libs</code> et le code du plugin <code>alaxos/cakephp3-"
+"bootstrap-theme</code>."
+
+#: src/Template/Pages/home.ctp:10
+msgid ""
+"The pages contained in this application are generated by using <code>bake</"
+"code> shell with the <code>alaxos/cakephp3-bootstrap-theme</code> templates."
+msgstr ""
+"Les pages contenues dans cette application ont été générées en utilisant le "
+"commande <code>bake</code> avec les templates du plugin <code>alaxos/"
+"cakephp3-bootstrap-theme</code>."
+
+#: src/Template/Pages/home.ctp:13
+msgid "They can be baked again by using the <code>bake-force</code> script:"
+msgstr ""
+"Elles peuvent être régénérées en utilisant le script <code>bake-force</code>:"
+
+#: src/Template/Pages/home.ctp:22
+msgid "Running tests"
+msgstr "Lancement des tests"
+
+#: src/Template/Pages/home.ctp:26
+msgid "install the test application"
+msgstr "installer l'application test"
+
+#: src/Template/Pages/home.ctp:38
+msgid "edit test connection infos"
+msgstr "modifier les infos de connexion de test"
+
+#: src/Template/Pages/home.ctp:58
+msgid "run tests"
+msgstr "lancer les tests"
+
+#: src/Template/Pages/home.ctp:62
+msgid ""
+"<code>phpunit.xml</code> is configured to run tests on <code>alaxos/cakephp3-"
+"libs</code> plugin + the current test application"
+msgstr ""
+"<code>phpunit.xml</code> est configuré pour lancer les tests des plugins "
+"<code>alaxos/cakephp3-libs</code> et de l'application courante"
+
+#: src/Template/Roles/add.ctp:9
 msgid "add role"
 msgstr "ajouter un rôle"
 
-#: src/Template/Roles/add.ctp:24 src/Template/Roles/copy.ctp:19
-#: src/Template/Roles/edit.ctp:24 src/Template/Roles/index.ctp:19
-#: src/Template/Roles/view.ctp:14
+#: src/Template/Roles/add.ctp:23 src/Template/Roles/copy.ctp:23
+#: src/Template/Roles/edit.ctp:23
 msgid "name"
 msgstr "nom"
 
-#: src/Template/Roles/copy.ctp:5
+#: src/Template/Roles/add.ctp:31 src/Template/Roles/copy.ctp:31
+#: src/Template/Roles/edit.ctp:31 src/Template/Users/add.ctp:66
+#: src/Template/Users/copy.ctp:66 src/Template/Users/edit.ctp:66
+msgid "submit"
+msgstr "envoyer"
+
+#: src/Template/Roles/copy.ctp:9
 msgid "copy role"
 msgstr "copier un rôle"
 
-#: src/Template/Roles/edit.ctp:10
+#: src/Template/Roles/edit.ctp:9
 msgid "edit role"
 msgstr "modifier un rôle"
 
-#: src/Template/Roles/index.ctp:20 src/Template/Users/index.ctp:25
-msgid "created"
-msgstr "créé"
+#: src/Template/Roles/index.ctp:9
+msgid "Roles"
+msgstr "Rôles"
 
-#: src/Template/Roles/index.ctp:21 src/Template/Users/index.ctp:26
-msgid "modified"
-msgstr "modifié"
+#: src/Template/Roles/index.ctp:56 src/Template/Users/index.ctp:86
+msgid "filter"
+msgstr "filtrer"
 
-#: src/Template/Roles/view.ctp:3
-msgid "role"
-msgstr "rôle"
+#: src/Template/Roles/index.ctp:86 src/Template/Users/index.ctp:131
+msgid "Are you sure you want to delete # {0}?"
+msgstr "Voulez-vous vraiment effacer # {0}?"
 
-#: src/Template/Users/add.ctp:10
+#: src/Template/Roles/index.ctp:112 src/Template/Users/index.ctp:157
+msgid "previous"
+msgstr "précédent"
+
+#: src/Template/Roles/index.ctp:114 src/Template/Users/index.ctp:159
+msgid "next"
+msgstr "suivant"
+
+#: src/Template/Roles/view.ctp:18
+msgid "Name"
+msgstr "Nom"
+
+#: src/Template/Users/add.ctp:9
 msgid "add user"
 msgstr "ajouter un utilisateur"
 
-#: src/Template/Users/add.ctp:24 src/Template/Users/copy.ctp:19
-#: src/Template/Users/edit.ctp:24 src/Template/Users/index.ctp:19
+#: src/Template/Users/add.ctp:23 src/Template/Users/copy.ctp:23
+#: src/Template/Users/edit.ctp:23
 msgid "role_id"
 msgstr "rôle"
 
-#: src/Template/Users/add.ctp:31 src/Template/Users/copy.ctp:26
-#: src/Template/Users/edit.ctp:31 src/Template/Users/index.ctp:20
-#: src/Template/Users/view.ctp:19
+#: src/Template/Users/add.ctp:30 src/Template/Users/copy.ctp:30
+#: src/Template/Users/edit.ctp:30
 msgid "firstname"
 msgstr "prénom"
 
-#: src/Template/Users/add.ctp:38 src/Template/Users/copy.ctp:33
-#: src/Template/Users/edit.ctp:38 src/Template/Users/index.ctp:21
-#: src/Template/Users/view.ctp:26
+#: src/Template/Users/add.ctp:37 src/Template/Users/copy.ctp:37
+#: src/Template/Users/edit.ctp:37
 msgid "lastname"
 msgstr "nom"
 
-#: src/Template/Users/add.ctp:45 src/Template/Users/copy.ctp:40
-#: src/Template/Users/edit.ctp:45 src/Template/Users/index.ctp:22
-#: src/Template/Users/view.ctp:33
+#: src/Template/Users/add.ctp:44 src/Template/Users/copy.ctp:44
+#: src/Template/Users/edit.ctp:44
 msgid "email"
 msgstr "email"
 
-#: src/Template/Users/add.ctp:52 src/Template/Users/copy.ctp:47
-#: src/Template/Users/edit.ctp:52 src/Template/Users/index.ctp:23
-#: src/Template/Users/view.ctp:40
+#: src/Template/Users/add.ctp:51 src/Template/Users/copy.ctp:51
+#: src/Template/Users/edit.ctp:51
 msgid "external_uid"
 msgstr "identifiant externe"
 
-#: src/Template/Users/add.ctp:59 src/Template/Users/copy.ctp:54
-#: src/Template/Users/edit.ctp:59 src/Template/Users/index.ctp:24
-#: src/Template/Users/view.ctp:47
+#: src/Template/Users/add.ctp:58 src/Template/Users/copy.ctp:58
+#: src/Template/Users/edit.ctp:58
 msgid "last_login_date"
 msgstr "dernière date de connexion"
 
-#: src/Template/Users/copy.ctp:5
+#: src/Template/Users/copy.ctp:9
 msgid "copy user"
 msgstr "copier l'utilisateur"
 
-#: src/Template/Users/edit.ctp:10
+#: src/Template/Users/edit.ctp:9
 msgid "edit user"
 msgstr "modifier un utilisateur"
 
-#: src/Template/Users/view.ctp:3
-msgid "user"
-msgstr "utilisateur"
+#: src/Template/Users/index.ctp:9
+msgid "Users"
+msgstr "Utilisateurs"
 
-#: src/Template/Users/view.ctp:14
+#: src/Template/Users/view.ctp:19
 msgid "Role"
 msgstr "Rôle"
+
+#: src/Template/Users/view.ctp:25
+msgid "Firstname"
+msgstr "Prénom"
+
+#: src/Template/Users/view.ctp:31
+msgid "Lastname"
+msgstr "Nom"
+
+#: src/Template/Users/view.ctp:37
+msgid "Email"
+msgstr "Email"
+
+#: src/Template/Users/view.ctp:43
+msgid "External Uid"
+msgstr "identifiant externe"
+
+#: src/Template/Users/view.ctp:49
+msgid "Last Login Date"
+msgstr "dernière date de connexion"
+
+#~ msgid "Only %s selected roles on %s could be deleted"
+#~ msgstr "Seuls %s rôles sélectionnés sur %s ont pu être effacés"
+
+#~ msgid "The role has been saved"
+#~ msgstr "Le rôle a été enregistré"
+
+#~ msgid "Only %s selected users on %s could be deleted"
+#~ msgstr "Seuls %s utilisateurs sélectionnés sur %s ont pu être effacés"
+
+#~ msgid "The user has been saved"
+#~ msgstr "L'utilisateur a été enregistré"
+
+#~ msgid "profiles"
+#~ msgstr "profils"
+
+#~ msgid "test application for CakePHP 3.x"
+#~ msgstr "CakePHP v3.x application test"
+
+#~ msgid "created"
+#~ msgstr "créé"
+
+#~ msgid "modified"
+#~ msgstr "modifié"
+
+#~ msgid "role"
+#~ msgstr "rôle"
+
+#~ msgid "user"
+#~ msgstr "utilisateur"

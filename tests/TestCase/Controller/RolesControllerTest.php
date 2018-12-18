@@ -491,7 +491,7 @@ class RolesControllerTest extends IntegrationTestCase
 
         $this->post('/roles/delete/3');
         $this->assertRedirect('/roles');
-        $this->assertSession(__('The role has been deleted'), 'Flash.flash.0.message');
+        $this->assertSession(__('The role has been deleted.'), 'Flash.flash.0.message');
 
         $total = TableRegistry::get('Roles')->find()->count();
         $this->assertEquals(2, $total);
@@ -573,10 +573,13 @@ class RolesControllerTest extends IntegrationTestCase
 
         $this->post('/roles/delete-all', $data);
         $this->assertRedirect('/roles');
-        $this->assertSession(sprintf(__('Only %s selected roles on %s could be deleted'), 1, 3), 'Flash.flash.0.message');
+        $this->assertSession(__('The roles could not be deleted as some of them are still used in the database'), 'Flash.flash.0.message');
 
+        /*
+         * None of them has been deleted
+         */
         $total = TableRegistry::get('Roles')->find()->count();
-        $this->assertEquals(2, $total);
+        $this->assertEquals(3, $total);
     }
 
     public function testDeleteAllAllUsed()
@@ -588,7 +591,7 @@ class RolesControllerTest extends IntegrationTestCase
 
         $this->post('/roles/delete-all', $data);
         $this->assertRedirect('/roles');
-        $this->assertSession(__('The selected roles could not be deleted. Please, try again.'), 'Flash.flash.0.message');
+        $this->assertSession(__('The roles could not be deleted as some of them are still used in the database'), 'Flash.flash.0.message');
 
         $total = TableRegistry::get('Roles')->find()->count();
         $this->assertEquals(3, $total);

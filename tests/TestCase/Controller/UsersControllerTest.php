@@ -528,7 +528,7 @@ class UsersControllerTest extends IntegrationTestCase
 
         $this->post('/users/delete/3');
         $this->assertRedirect('/users');
-        $this->assertSession(__('The user has been deleted'), 'Flash.flash.0.message');
+        $this->assertSession(__('The user has been deleted.'), 'Flash.flash.0.message');
 
         $total = TableRegistry::get('Users')->find()->count();
         $this->assertEquals(2, $total);
