@@ -58,22 +58,22 @@ class RolesTable extends AppTable
     {
         $validator
             ->integer('id')
-            ->allowEmpty('id', 'create');
+            ->allowEmptyString('id', 'create');
 
         $validator
             ->scalar('name')
             ->maxLength('name', 100)
             ->requirePresence('name', 'create')
-            ->notEmpty('name')
+            ->allowEmptyString('name', false)
             ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->integer('created_by')
-            ->allowEmpty('created_by');
+            ->allowEmptyString('created_by');
 
         $validator
             ->integer('modified_by')
-            ->allowEmpty('modified_by');
+            ->allowEmptyString('modified_by');
 
         return $validator;
     }

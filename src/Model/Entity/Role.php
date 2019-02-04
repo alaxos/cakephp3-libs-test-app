@@ -10,9 +10,9 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $name
  * @property \Cake\I18n\Time $created
- * @property int $created_by
+ * @property int|null $created_by
  * @property \Cake\I18n\Time $modified
- * @property int $modified_by
+ * @property int|null $modified_by
  *
  * @property \App\Model\Entity\User $creator
  * @property \App\Model\Entity\User $editor

@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
 
+use App\Controller\AppController;
+use Cake\Core\Exception\Exception;
 use Cake\Core\Configure;
 
 /**

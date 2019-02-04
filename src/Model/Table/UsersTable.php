@@ -5,8 +5,8 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\I18n\Time;
 use Cake\Core\Exception\Exception;
+use Cake\I18n\Time;
 
 /**
  * Users Model
@@ -61,44 +61,44 @@ class UsersTable extends AppTable
     {
         $validator
             ->integer('id')
-            ->allowEmpty('id', 'create');
+            ->allowEmptyString('id', 'create');
 
         $validator
             ->scalar('firstname')
             ->maxLength('firstname', 100)
             ->requirePresence('firstname', 'create')
-            ->notEmpty('firstname');
+            ->allowEmptyString('firstname', false);
 
         $validator
             ->scalar('lastname')
             ->maxLength('lastname', 100)
             ->requirePresence('lastname', 'create')
-            ->notEmpty('lastname');
+            ->allowEmptyString('lastname', false);
 
         $validator
             ->email('email')
             ->requirePresence('email', 'create')
-            ->notEmpty('email')
+            ->allowEmptyString('email', false)
             ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('external_uid')
             ->maxLength('external_uid', 100)
             ->requirePresence('external_uid', 'create')
-            ->notEmpty('external_uid')
+            ->allowEmptyString('external_uid', false)
             ->add('external_uid', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->dateTime('last_login_date')
-            ->allowEmpty('last_login_date');
+            ->allowEmptyDateTime('last_login_date');
 
         $validator
             ->integer('created_by')
-            ->allowEmpty('created_by');
+            ->allowEmptyString('created_by');
 
         $validator
             ->integer('modified_by')
-            ->allowEmpty('modified_by');
+            ->allowEmptyString('modified_by');
 
         return $validator;
     }
