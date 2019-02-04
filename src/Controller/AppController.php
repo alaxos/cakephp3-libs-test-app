@@ -21,6 +21,7 @@ use Cake\Core\Configure;
 use Alaxos\Lib\StringTool;
 use Cake\I18n\Time;
 use Cake\Http\ServerRequest;
+use Cake\Http\Cookie\Cookie;
 
 /**
  * Application Controller
@@ -61,7 +62,6 @@ class AppController extends Controller
          * see http://book.cakephp.org/3.0/en/controllers/components/security.html
          */
         $this->loadComponent('Security');
-        $this->loadComponent('Csrf');
 
         $this->loadComponent('Alaxos.Filter');
         $this->loadComponent('Alaxos.Logger', ['days_to_keep_logs' => 30]);
@@ -120,7 +120,13 @@ class AppController extends Controller
 
         if (!empty($langToSet)) {
             I18n::setLocale($langToSet);
-            $this->setResponse($this->getResponse()->withCookie('lang', $langToSet));
+
+            $cookie = new Cookie('lang');
+            $cookie = $cookie->withValue($langToSet)
+                             ->withHttpOnly(true)
+                             ->withSecure(true)
+                             ->withExpiry(Time::parse(strtotime('+1 year')));
+            $this->setResponse($this->getResponse()->withCookie($cookie));
         }
 
         /**********************************

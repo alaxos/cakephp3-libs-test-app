@@ -17,11 +17,11 @@ class RolesControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.roles',
-        'app.users',
-        'plugin.alaxos.log_categories',
-        'plugin.alaxos.log_levels',
-        'plugin.alaxos.log_entries',
+        'app.Roles',
+        'app.Users',
+        'plugin.Alaxos.LogCategories',
+        'plugin.Alaxos.LogLevels',
+        'plugin.Alaxos.LogEntries',
     ];
 
     /**

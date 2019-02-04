@@ -31,7 +31,6 @@ require CORE_PATH . 'config' . DS . 'bootstrap.php';
 
 use Cake\Cache\Cache;
 use Cake\Console\ConsoleErrorHandler;
-use Cake\Core\App;
 use Cake\Core\Configure;
 use Cake\Core\Configure\Engine\PhpConfig;
 use Cake\Core\Plugin;
@@ -41,6 +40,7 @@ use Cake\Error\ErrorHandler;
 use Cake\Http\ServerRequest;
 use Cake\Log\Log;
 use Cake\Mailer\Email;
+use Cake\Mailer\TransportFactory;
 use Cake\Utility\Inflector;
 use Cake\Utility\Security;
 
@@ -48,6 +48,10 @@ use Cake\Utility\Security;
  * Uncomment block of code below if you want to use `.env` file during development.
  * You should copy `config/.env.default to `config/.env` and set/modify the
  * variables as required.
+ *
+ * It is HIGHLY discouraged to use a .env file in production, due to security risks
+ * and decreased performance on each request. The purpose of the .env file is to emulate
+ * the presence of the environment variables like they would be present in production.
  */
 // if (!env('APP_NAME') && file_exists(CONFIG . '.env')) {
 //     $dotenv = new \josegonzalez\Dotenv\Loader([CONFIG . '.env']);
@@ -145,7 +149,7 @@ if (!Configure::read('App.fullBaseUrl')) {
 
 Cache::setConfig(Configure::consume('Cache'));
 ConnectionManager::setConfig(Configure::consume('Datasources'));
-Email::setConfigTransport(Configure::consume('EmailTransport'));
+TransportFactory::setConfig(Configure::consume('EmailTransport'));
 Email::setConfig(Configure::consume('Email'));
 Log::setConfig(Configure::consume('Log'));
 Security::setSalt(Configure::consume('Security.salt'));
@@ -179,16 +183,10 @@ ServerRequest::addDetector('tablet', function ($request) {
  * locale specific date formats. For details see
  * @link https://book.cakephp.org/3.0/en/core-libraries/internationalization-and-localization.html#parsing-localized-datetime-data
  */
-// Type::build('time')
-//     ->useImmutable();
-// Type::build('date')
-//     ->useImmutable();
-// Type::build('datetime')
-//     ->useImmutable();
-// Type::build('timestamp')
-//     ->useImmutable();
-
-Configure::write('default_display_timezone', 'Europe/Zurich');
+Type::build('time')->useLocaleParser();
+Type::build('date')->useLocaleParser();
+Type::build('datetime')->useLocaleParser();
+Type::build('timestamp')->useLocaleParser();
 
 /*
  * Custom Inflector rules, can be set to correctly pluralize or singularize
@@ -199,39 +197,6 @@ Configure::write('default_display_timezone', 'Europe/Zurich');
 //Inflector::rules('irregular', ['red' => 'redlings']);
 //Inflector::rules('uninflected', ['dontinflectme']);
 //Inflector::rules('transliteration', ['/å/' => 'aa']);
-
-/*
- * Plugins need to be loaded manually, you can either load them one by one or all of them in a single call
- * Uncomment one of the lines below, as you need. make sure you read the documentation on Plugin to use more
- * advanced ways of loading plugins
- *
- * Plugin::loadAll(); // Loads all plugins at once
- * Plugin::load('Migrations'); //Loads a single plugin named Migrations
- *
- */
-
-/*
- * Only try to load DebugKit in development mode
- * Debug Kit should not be installed on a production system
- */
-if (Configure::read('debug')) {
-    Plugin::load('DebugKit', ['bootstrap' => true]);
-}
-
-/*************************************************************************************/
-
-/*
- * Allow display of local time
- */
-Type::build('time')->useLocaleParser();
-Type::build('date')->useLocaleParser();
-Type::build('datetime')->useLocaleParser();
-Type::build('timestamp')->useLocaleParser();
-
-Configure::write('default_display_timezone', 'Europe/Zurich');
-
-Plugin::load('Alaxos', ['bootstrap' => true]);
-Plugin::load('Alaxos/BootstrapTheme');
 
 define('ROLE_ID_ADMINISTRATOR', 1);
 define('ROLE_ID_USER',          2);
