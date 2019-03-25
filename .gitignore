@@ -6,6 +6,7 @@
 .buildpath
 .project
 .settings
+*.iml
 
 uploaded_files/*
 test_uploaded_files/*
