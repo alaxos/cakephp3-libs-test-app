@@ -95,17 +95,13 @@ class AppController extends Controller
         $langToSet          = null;
 
         $queryParams = $this->getRequest()->getQueryParams();
-        if (isset($queryParams['lang']) && in_array($queryParams['lang'], $availableLanguages)) {
-            $langToSet = $queryParams['lang'];
-
+        if (isset($queryParams['lang']) && isset($availableLanguages[$queryParams['lang']])) {
+            $langToSet = $availableLanguages[$queryParams['lang']];
         } else {
-
             $cookieLang = $this->getRequest()->getCookie('lang');
             if (!empty($cookieLang) && in_array($cookieLang, $availableLanguages)) {
                 $langToSet = $cookieLang;
-
             } elseif (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-
                 $browserLang = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
                 foreach ($availableLanguages as $availableLanguage) {
                     $availableLangPrefix = substr($availableLanguage, 0, stripos($availableLanguage, '-'));

@@ -1,4 +1,6 @@
 <?php
+use Cake\Core\Configure;
+
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -46,19 +48,39 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <div class="col-md-12">
                 <header>
                     <div class="row">
-                        <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
+                        <div class="col-lg-3 col-md-4 col-sm-3 col-xs-12">
                             <?php
                             echo '<div id="top_logo" style="background-color:#D33C44;">';
                             echo $this->Html->image('cake-logo.png');
                             echo '</div>';
                             ?>
                         </div>
-                        <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12">
+                        <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
                             <?php
                             echo '<h1 id="application_title">';
                             echo $this->Html->link(__("CakePHP v3.x test application"), '/');
                             echo '</h1>';
                             ?>
+                        </div>
+                        <div class="col-lg-3 col-md-2 col-sm-2 col-xs-12">
+                            <div class="text-right">
+                                <?php
+                                $languages  = Configure::read('website_languages');
+                                $langUrl = [
+                                    'plugin'     => $this->request->getParam('plugin'),
+                                    'prefix'     => $this->request->getParam('prefix'),
+                                    'controller' => $this->request->getParam('controller'),
+                                    'action'     => $this->request->getParam('action'),
+                                    '?'          => $this->request->getQuery(),
+                                ];
+                                $langUrl = array_merge($langUrl, $this->request->getParam('pass'));
+                                foreach ($languages as $langShort => $langLong) {
+                                    $langUrl['?']['lang'] = $langShort;
+                                    echo $this->Html->link($langShort, $langUrl);
+                                    echo ' ';
+                                }
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </header>

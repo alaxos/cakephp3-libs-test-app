@@ -28,6 +28,12 @@ $menu[] = [
         'options' => ['id' => 'roles']
     ];
 
+$menu[] = [
+    'title'   => ___('things'),
+    'url'     => ['plugin' => false, 'prefix' => false, 'controller' => 'Things', 'action' => 'index'],
+    'options' => ['id' => 'things']
+];
+
 
 $menu['_right_'] = [];
 if(isset($logged_user)) {

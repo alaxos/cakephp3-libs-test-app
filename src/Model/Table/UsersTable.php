@@ -38,7 +38,7 @@ class UsersTable extends AppTable
         parent::initialize($config);
 
         $this->setTable('users');
-        $this->setDisplayField('id');
+        $this->setDisplayField('firstname');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');

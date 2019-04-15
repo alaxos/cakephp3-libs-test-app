@@ -201,7 +201,7 @@ Type::build('timestamp')->useLocaleParser();
 define('ROLE_ID_ADMINISTRATOR', 1);
 define('ROLE_ID_USER',          2);
 
-Configure::write('website_languages', ['fr-ch', 'de-ch', 'en-en']);
+Configure::write('website_languages', ['fr' => 'fr-ch', 'en' => 'en-en']);
 
 Configure::write('Shibboleth.unique_id_attribute',         'uniqueID');
 Configure::write('Shibboleth.attributes_mapping',          [Configure::read('Shibboleth.unique_id_attribute') => 'external_uid',
