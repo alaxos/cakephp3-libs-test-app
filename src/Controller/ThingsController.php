@@ -214,4 +214,11 @@ class ThingsController extends AppController
         $users = $this->Things->Users->find('list', ['limit' => 200]);
         $this->set(compact('thing', 'users'));
     }
+
+    public function test()
+    {
+        $thing = $this->Things->newEntity();
+
+        $this->set(compact('thing', 'users'));
+    }
 }
