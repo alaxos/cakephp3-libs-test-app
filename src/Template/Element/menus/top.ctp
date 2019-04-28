@@ -28,10 +28,18 @@ $menu[] = [
         'options' => ['id' => 'roles']
     ];
 
-$menu[] = [
-    'title'   => ___('things'),
-    'url'     => ['plugin' => false, 'prefix' => false, 'controller' => 'Things', 'action' => 'index'],
-    'options' => ['id' => 'things']
+$menu[___('things')] = [
+    [
+        'title'   => ___('index'),
+        'url'     => ['plugin' => false, 'prefix' => false, 'controller' => 'Things', 'action' => 'index'],
+        'options' => ['id' => 'things']
+    ],
+    [
+        'title'   => ___('test date / datetime widget'),
+        'url'     => ['plugin' => false, 'prefix' => false, 'controller' => 'Things', 'action' => 'test'],
+        'options' => ['id' => 'things_test']
+    ]
+
 ];
 
 

@@ -3,6 +3,10 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Thing[]|\Cake\Collection\CollectionInterface $things
  */
+
+if ($this->request->is('post')) {
+    debug($this->request->getData());
+}
 ?>
 
 <div class="things index">
@@ -99,12 +103,12 @@
                 </td>
                 <td>
                     <?php
-                    echo $this->AlaxosForm->filterDate('date_field');
+                    echo $this->AlaxosForm->filterField('date_field');
                     ?>
                 </td>
                 <td>
                     <?php
-                    echo $this->AlaxosForm->filterDate('datetime_field');
+                    echo $this->AlaxosForm->filterField('datetime_field');
                     ?>
                 </td>
                 <td>
