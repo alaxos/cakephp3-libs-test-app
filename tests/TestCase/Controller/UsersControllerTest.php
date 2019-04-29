@@ -57,7 +57,8 @@ class UsersControllerTest extends IntegrationTestCase
          * Page contains date filter
          */
         $this->assertResponseContains('id="filter-created-start"');
-        $this->assertResponseContains('<div class="input-group date alaxos-date" id="filter-created-start-container">');
+        $this->assertResponseContains('<input type="text" name="Filter[created][__start__]" id="filter-created-start" class="form-control" placeholder="' . __d('alaxos', 'from or equal') . '"/>');
+        $this->assertResponseContains('<input type="text" name="Filter[created][__end__]" id="filter-created-end" class="form-control" placeholder="' . __d('alaxos', 'to') . '"/>');
         $this->assertResponseContains(__d('alaxos', 'from or equal'));
     }
 

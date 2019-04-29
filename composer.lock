@@ -92,16 +92,16 @@
         },
         {
             "name": "alaxos/cakephp3-libs",
-            "version": "3.7.4",
+            "version": "3.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alaxos/cakephp3-libs.git",
-                "reference": "8c8c1d53d5cc53569f55478ac9399172bcc72f86"
+                "reference": "685e9f17a3fbe3550c59a03a65c4d75df763e804"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alaxos/cakephp3-libs/zipball/8c8c1d53d5cc53569f55478ac9399172bcc72f86",
-                "reference": "8c8c1d53d5cc53569f55478ac9399172bcc72f86",
+                "url": "https://api.github.com/repos/alaxos/cakephp3-libs/zipball/685e9f17a3fbe3550c59a03a65c4d75df763e804",
+                "reference": "685e9f17a3fbe3550c59a03a65c4d75df763e804",
                 "shasum": ""
             },
             "require": {
@@ -131,7 +131,7 @@
                 "cakephp",
                 "libraries"
             ],
-            "time": "2019-04-18T05:48:27+00:00"
+            "time": "2019-04-28T20:40:29+00:00"
         },
         {
             "name": "aura/intl",
@@ -618,16 +618,16 @@
         },
         {
             "name": "robmorgan/phinx",
-            "version": "0.10.6",
+            "version": "0.10.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/phinx.git",
-                "reference": "f28a1c6ab1fa1f0295cddade9aea05eeb303bd2b"
+                "reference": "ba2dae98bb69d39531311e8fd72dd51e8e06ff32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/phinx/zipball/f28a1c6ab1fa1f0295cddade9aea05eeb303bd2b",
-                "reference": "f28a1c6ab1fa1f0295cddade9aea05eeb303bd2b",
+                "url": "https://api.github.com/repos/cakephp/phinx/zipball/ba2dae98bb69d39531311e8fd72dd51e8e06ff32",
+                "reference": "ba2dae98bb69d39531311e8fd72dd51e8e06ff32",
                 "shasum": ""
             },
             "require": {
@@ -640,7 +640,7 @@
             },
             "require-dev": {
                 "cakephp/cakephp-codesniffer": "^3.0",
-                "phpunit/phpunit": ">=5.7",
+                "phpunit/phpunit": ">=5.7,<7.0",
                 "sebastian/comparator": ">=1.2.3"
             },
             "bin": [
@@ -688,7 +688,7 @@
                 "migrations",
                 "phinx"
             ],
-            "time": "2018-08-12T17:22:43+00:00"
+            "time": "2019-04-25T09:12:16+00:00"
         },
         {
             "name": "symfony/config",
@@ -1347,16 +1347,16 @@
         },
         {
             "name": "cakephp/bake",
-            "version": "1.9.5",
+            "version": "1.9.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cakephp/bake.git",
-                "reference": "8a93a8867a1fcf2e9ab0deff4c4651dcd4a478ac"
+                "reference": "96651b0d4c4b4d29cf6faa87114f745b91130eec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/bake/zipball/8a93a8867a1fcf2e9ab0deff4c4651dcd4a478ac",
-                "reference": "8a93a8867a1fcf2e9ab0deff4c4651dcd4a478ac",
+                "url": "https://api.github.com/repos/cakephp/bake/zipball/96651b0d4c4b4d29cf6faa87114f745b91130eec",
+                "reference": "96651b0d4c4b4d29cf6faa87114f745b91130eec",
                 "shasum": ""
             },
             "require": {
@@ -1391,7 +1391,7 @@
                 "bake",
                 "cakephp"
             ],
-            "time": "2019-04-13T01:13:37+00:00"
+            "time": "2019-04-24T21:12:31+00:00"
         },
         {
             "name": "cakephp/cakephp-codesniffer",
@@ -4054,16 +4054,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.39.1",
+            "version": "v1.40.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "23e7b6f0cfa1d7ba3de69f30d8e05cf957412fec"
+                "reference": "2ba4eaf6b0649760a2cdbc0ada19486f9c1b4125"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/23e7b6f0cfa1d7ba3de69f30d8e05cf957412fec",
-                "reference": "23e7b6f0cfa1d7ba3de69f30d8e05cf957412fec",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/2ba4eaf6b0649760a2cdbc0ada19486f9c1b4125",
+                "reference": "2ba4eaf6b0649760a2cdbc0ada19486f9c1b4125",
                 "shasum": ""
             },
             "require": {
@@ -4078,7 +4078,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.39-dev"
+                    "dev-master": "1.40-dev"
                 }
             },
             "autoload": {
@@ -4116,7 +4116,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-04-16T17:12:57+00:00"
+            "time": "2019-04-28T06:54:53+00:00"
         },
         {
             "name": "umpirsky/twig-php-function",
