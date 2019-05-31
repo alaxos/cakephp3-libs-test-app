@@ -9,3 +9,7 @@
 ./bin/cake bake model Roles --theme Alaxos/BootstrapTheme --force --no-test --no-fixture
 ./bin/cake bake controller Roles --theme Alaxos/BootstrapTheme --force --no-test
 ./bin/cake bake template Roles --theme Alaxos/BootstrapTheme --force
+
+./bin/cake bake model Things --theme Alaxos/BootstrapTheme --force --no-test --no-fixture
+./bin/cake bake controller Things --theme Alaxos/BootstrapTheme --force --no-test
+./bin/cake bake template Things --theme Alaxos/BootstrapTheme --force
